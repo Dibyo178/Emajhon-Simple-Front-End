@@ -1,11 +1,13 @@
 import React from "react";
 import { FaShoppingCart } from 'react-icons/fa';
+import { Link } from "react-router-dom";
 // FaShoppingCart
 import "./Product.css";
 
 const Product = (props) => {
-  const { img, name, seller, price, stock } = props.product;
-  console.log(props);
+  const { img, name, seller, price, stock ,key} = props.product;
+  // console.log(props.product.key);
+  // console.log(props)
   return (
     
       <div className="product">
@@ -15,7 +17,8 @@ const Product = (props) => {
         </div>
         <div>
           {/* <h4>{props.product.name}</h4> */}
-          <h4 className="product-name">{name}</h4>
+          {/* <h4 className="product-name">{name}</h4> */}
+          <h4 className="product-name"><Link to={"/product/"+key}>{name}</Link></h4>
           <br />
           <p>
             <small>by:{seller}</small>
@@ -29,13 +32,12 @@ const Product = (props) => {
             <small>Only:{stock} left in stock -- order soon</small>
           </p>
 
-          <button 
-
-          onClick={()=>props.handleAddProduct(props.product)} //parameter pass korle ()=>{} use kora labe
-          className='main-button'>
-            <FaShoppingCart/>  
-            Add to cart
-            </button>
+    { props.showAddToCart && <button 
+      onClick={()=>props.handleAddProduct(props.product)} //parameter pass korle ()=>{} use kora labe
+      className='main-button'>
+        <FaShoppingCart/>  
+        Add to cart
+        </button>}
         </div>
       </div>
     
